@@ -1,0 +1,10 @@
+export { default as Login } from './Login';
+export { default as Register } from './Register';
+export { default as Dashboard } from './Dashboard';
+export { default as PointOfSale } from './PointOfSale';
+export { default as Products } from './Products';
+export { default as Orders } from './Orders';
+export { default as Customers } from './Customers';
+export { default as Reports } from './Reports';
+export { default as Profile } from './Profile';
+export { default as NotFound } from './NotFound';

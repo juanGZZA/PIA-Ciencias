@@ -1,0 +1,85 @@
+{
+  "users": [
+    {
+      "id": "u_admin",
+      "name": "Admin User",
+      "email": "admin@local.test",
+      "password": "$2a$08$P.cO.hiHDF5jFNyE76V9jOMmhuS18sfUXrnWhTc8fZysIq58XXg8S",
+      "role": "admin",
+      "isActive": true,
+      "createdAt": "2025-11-04T00:00:00.000Z"
+    },
+    {
+      "id": "u_mhlb96h4z5onlj",
+      "name": "Test User",
+      "email": "test@example.com",
+      "password": "$2a$08$DrhqtUJfreBOi9qHddyKUuaXlzvPeIQVjLCA0DuWCisOtG6P5soo2",
+      "role": "customer",
+      "isActive": true,
+      "createdAt": "2025-11-05T01:20:03.592Z"
+    },
+    {
+      "id": "u_mhlbam8nupv40v",
+      "name": "juan",
+      "email": "juan@gmail.com",
+      "password": "$2a$08$yo2kNyr.JUMiv9C2tGsMB.JRYtmz9h0dcgWCWg0.d9c26LM2wmaUm",
+      "role": "customer",
+      "isActive": true,
+      "createdAt": "2025-11-05T01:21:10.679Z"
+    }
+  ],
+  "products": [
+    {
+      "id": "p_mhlbhojz7efxn4",
+      "name": "Tele",
+      "description": "Una tele bien chida",
+      "price": 1000,
+      "stock": 20,
+      "category": "no se",
+      "sku": "q es eso",
+      "barcode": "XD",
+      "images": [],
+      "isActive": true,
+      "createdAt": "2025-11-05T01:26:40.271Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "o_mhlcdctp7o0gpa",
+      "items": [
+        {
+          "product": "p_mhlbhojz7efxn4",
+          "quantity": 8,
+          "price": 1000
+        }
+      ],
+      "subtotal": 8000,
+      "tax": 0,
+      "total": 8000,
+      "status": "pending",
+      "paymentMethod": "card",
+      "invoiceNumber": "INV1762307478061",
+      "shippingAddress": {},
+      "createdAt": "2025-11-05T01:51:18.061Z"
+    },
+    {
+      "id": "o_mhldrgshji942k",
+      "customerId": "u_mhlbam8nupv40v",
+      "items": [
+        {
+          "product": "p_mhlbhojz7efxn4",
+          "quantity": 3,
+          "price": 1000
+        }
+      ],
+      "subtotal": 3000,
+      "tax": 0,
+      "total": 3000,
+      "status": "pending",
+      "paymentMethod": "card",
+      "invoiceNumber": "INV1762309816002",
+      "shippingAddress": {},
+      "createdAt": "2025-11-05T02:30:16.002Z"
+    }
+  ]
+}
