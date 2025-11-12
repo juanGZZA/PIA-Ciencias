@@ -9,7 +9,7 @@ import PointOfSale from './pages/PointOfSale';
 import Products from './pages/Products';
 import Orders from './pages/Orders';
 import Customers from './pages/Customers';
-import Reports from './pages/Reports';
+// Reports page removed per request
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 import Store from './pages/Store';
@@ -56,11 +56,7 @@ function App() {
           </PrivateRoute>
         } />
         
-        <Route path="reports" element={
-          <PrivateRoute roles={["admin"]}>
-            <Reports />
-          </PrivateRoute>
-        } />
+        {/* Reports route removed */}
         
         <Route path="profile" element={
           <PrivateRoute>

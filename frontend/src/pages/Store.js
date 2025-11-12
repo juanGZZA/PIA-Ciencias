@@ -6,6 +6,9 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
+import CardMedia from '@mui/material/CardMedia';
+import Stack from '@mui/material/Stack';
+import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
@@ -78,22 +81,31 @@ export default function Store() {
           <Grid container spacing={2}>
             {products.map(p => (
               <Grid item xs={12} sm={6} md={6} key={p.id || p._id}>
-                <Card>
-                  <CardContent>
-                    <Typography variant="h6">{p.name}</Typography>
-                    <Typography color="text.secondary">{p.description}</Typography>
-                    <Typography sx={{ mt: 1 }}>${p.price}</Typography>
-                    <TextField label="Quantity" type="number" size="small" sx={{ mt: 1 }} defaultValue={1} inputProps={{ min: 1 }} id={`qty-${p.id}`} />
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" onClick={() => {
-                      const el = document.getElementById(`qty-${p.id}`);
-                      const qty = el ? parseInt(el.value || '1', 10) : 1;
-                      handleAdd(p, qty);
-                    }}>Add to cart</Button>
-                  </CardActions>
-                </Card>
-              </Grid>
+                  <Card sx={{ transition: 'transform 0.15s ease, box-shadow 0.15s ease', '&:hover': { transform: 'translateY(-6px)', boxShadow: '0 8px 20px rgba(0,0,0,0.12)' } }}>
+                    {p.images && p.images.length ? (
+                      <CardMedia component="img" height="160" image={p.images[0]} alt={p.name} />
+                    ) : (
+                      <Box sx={{ height: 160, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'grey.100' }}>
+                        <Typography color="text.secondary">No image</Typography>
+                      </Box>
+                    )}
+                    <CardContent>
+                      <Stack direction="row" justifyContent="space-between" alignItems="center">
+                        <Typography variant="h6">{p.name}</Typography>
+                        <Chip label={`$${p.price}`} color="primary" />
+                      </Stack>
+                      <Typography color="text.secondary" sx={{ mt: 1 }}>{p.description}</Typography>
+                      <TextField label="Quantity" type="number" size="small" sx={{ mt: 1 }} defaultValue={1} inputProps={{ min: 1 }} id={`qty-${p.id}`} />
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small" onClick={() => {
+                        const el = document.getElementById(`qty-${p.id}`);
+                        const qty = el ? parseInt(el.value || '1', 10) : 1;
+                        handleAdd(p, qty);
+                      }}>Add to cart</Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
             ))}
           </Grid>
         </Grid>

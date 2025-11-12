@@ -8,6 +8,9 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Chip from '@mui/material/Chip';
 
 export default function Layout() {
   const dispatch = useDispatch();
@@ -34,32 +37,43 @@ export default function Layout() {
   };
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" color="primary">
         <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            POS System
+          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
+            Mi Tienda
           </Typography>
           {/* Role-aware navigation */}
-          {role === 'admin' && <Button color="inherit" component={Link} to="/">Dashboard</Button>}
-          {(role === 'employee') && <Button color="inherit" component={Link} to="/pos">POS</Button>}
+          {role === 'admin' && <Button color="inherit" component={Link} to="/" sx={{ mx: 0.5 }}>Dashboard</Button>}
+          {(role === 'employee') && <Button color="inherit" component={Link} to="/pos" sx={{ mx: 0.5 }}>POS</Button>}
           {/* Customers / store users see the public store and a 'Historial' link */}
           {(role === 'customer' || role === 'store') ? (
             <>
-              <Button color="inherit" component={Link} to="/store">Tienda</Button>
-              <Button color="inherit" component={Link} to="/orders">Historial</Button>
+              <Button color="inherit" component={Link} to="/store" sx={{ mx: 0.5 }}>Tienda</Button>
+              <Button color="inherit" component={Link} to="/orders" sx={{ mx: 0.5 }}>Historial</Button>
             </>
           ) : (
             <>
-              <Button color="inherit" component={Link} to="/products">Products</Button>
-              <Button color="inherit" component={Link} to="/orders">Orders</Button>
+              <Button color="inherit" component={Link} to="/products" sx={{ mx: 0.5 }}>Products</Button>
+              <Button color="inherit" component={Link} to="/orders" sx={{ mx: 0.5 }}>Orders</Button>
             </>
           )}
-          {role === 'admin' && <Button color="inherit" component={Link} to="/customers">Customers</Button>}
-          {role === 'admin' && <Button color="inherit" component={Link} to="/reports">Reports</Button>}
-          <Button color="inherit" component={Link} to="/profile">Profile</Button>
-          {user && (
-            <Button color="inherit" onClick={handleLogout}>Logout</Button>
-          )}
+          {role === 'admin' && <Button color="inherit" component={Link} to="/customers" sx={{ mx: 0.5 }}>Customers</Button>}
+
+          <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
+            {user && (
+              <>
+                <Avatar sx={{ bgcolor: 'secondary.main', width: 34, height: 34, mr: 1 }}>{(user.name || user.email || 'U').charAt(0).toUpperCase()}</Avatar>
+                <Box sx={{ mr: 2, textAlign: 'right' }}>
+                  <Typography variant="body2" sx={{ lineHeight: 1 }}>{user?.name || user?.email}</Typography>
+                  <Chip label={user?.role || 'guest'} size="small" sx={{ mt: 0.5 }} />
+                </Box>
+              </>
+            )}
+            <Button color="inherit" component={Link} to="/profile" sx={{ mx: 0.5 }}>Profile</Button>
+            {user && (
+              <Button color="inherit" onClick={handleLogout} sx={{ mx: 0.5, borderLeft: '1px solid rgba(255,255,255,0.12)', pl: 2 }}>Logout</Button>
+            )}
+          </Box>
         </Toolbar>
       </AppBar>
       <Container sx={{ mt: 3 }}>

@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Chip from '@mui/material/Chip';
+import Button from '@mui/material/Button';
 import { useSelector } from 'react-redux';
 
 export default function Orders() {
@@ -31,13 +33,33 @@ export default function Orders() {
   return (
     <Box>
       <Typography variant="h4">{user?.role === 'admin' ? 'Orders' : 'Historial'}</Typography>
-      <List>
+      <Grid container spacing={2} sx={{ mt: 2 }}>
         {orders.map(o => (
-          <ListItem key={o.id}>
-            <ListItemText primary={`${o.invoiceNumber || o.id} - $${o.total}`} secondary={`Status: ${o.status} | Items: ${o.items?.length || 0}`} />
-          </ListItem>
+          <Grid item xs={12} md={6} key={o.id}>
+            <Card>
+              <CardContent>
+                <Grid container justifyContent="space-between" alignItems="center">
+                  <Grid item>
+                    <Typography variant="subtitle1">{o.invoiceNumber || o.id}</Typography>
+                    <Typography variant="body2" color="text.secondary">Items: {o.items?.length || 0}</Typography>
+                  </Grid>
+                  <Grid item>
+                    <Chip label={o.status} color={o.status === 'pending' ? 'warning' : 'success'} />
+                  </Grid>
+                </Grid>
+                <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
+                  <Grid item>
+                    <Typography variant="h6">${o.total}</Typography>
+                  </Grid>
+                  <Grid item>
+                    <Button size="small">View</Button>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+          </Grid>
         ))}
-      </List>
+      </Grid>
     </Box>
   );
 }
